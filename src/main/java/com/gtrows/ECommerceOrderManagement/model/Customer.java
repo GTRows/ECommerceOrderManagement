@@ -17,4 +17,7 @@ public class Customer extends BaseEntity {
     private String lastName;
     private String email;
 
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 }
