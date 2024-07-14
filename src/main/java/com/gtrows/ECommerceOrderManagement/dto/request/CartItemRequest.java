@@ -1,4 +1,4 @@
-package com.gtrows.ECommerceOrderManagement.model;
+package com.gtrows.ECommerceOrderManagement.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartItem extends BaseEntity {
-    private Product product;
+public class CartItemRequest {
+    private String productId;
     private int quantity;
-    private Double initialPrice;
 }

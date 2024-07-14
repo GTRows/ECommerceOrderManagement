@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order extends BaseEntity {
-
     @DBRef
     private Customer customer;
-
-    @DBRef
     private List<OrderItem> items = new ArrayList<>();
-
-    private BigDecimal totalPrice;
-
+    private double totalPrice;
 }

@@ -1,7 +1,10 @@
 package com.gtrows.ECommerceOrderManagement.controller;
 
+import com.gtrows.ECommerceOrderManagement.dto.response.IResponse.AccessResponse;
+import com.gtrows.ECommerceOrderManagement.dto.response.IResponse.ErrorResponse;
 import com.gtrows.ECommerceOrderManagement.model.BaseEntity;
 import com.gtrows.ECommerceOrderManagement.service.GenericService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@Hidden
 @AllArgsConstructor
 public abstract class GenericController<T extends BaseEntity> {
 
@@ -21,9 +25,12 @@ public abstract class GenericController<T extends BaseEntity> {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<T> getById(@PathVariable String id) {
+    public ResponseEntity<?> getById(@PathVariable String id) {
         Optional<T> entityOptional = service.getById(id);
-        return entityOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        if (entityOptional.isEmpty()) {
+            return new ErrorResponse("Entity not found", HttpStatus.NOT_FOUND).toResponseEntity();
+        }
+        return ResponseEntity.ok(entityOptional.get());
     }
 
     @PostMapping
@@ -33,7 +40,7 @@ public abstract class GenericController<T extends BaseEntity> {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<T> update(@PathVariable String id, @RequestBody T entity) {
+    public ResponseEntity<?> update(@PathVariable String id, @RequestBody T entity) {
         Optional<T> existingEntityOptional = service.getById(id);
         if (existingEntityOptional.isPresent()) {
             T existingEntity = existingEntityOptional.get();
@@ -41,18 +48,18 @@ public abstract class GenericController<T extends BaseEntity> {
             T updatedEntity = service.save(entity);
             return ResponseEntity.ok(updatedEntity);
         } else {
-            return ResponseEntity.notFound().build();
+            return new ErrorResponse("Entity not found", HttpStatus.NOT_FOUND).toResponseEntity();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
+    public ResponseEntity<?> delete(@PathVariable String id) {
         Optional<T> existingEntityOptional = service.getById(id);
         if (existingEntityOptional.isPresent()) {
             service.delete(id);
-            return ResponseEntity.ok().build();
+            return new AccessResponse("Entity deleted successfully").toResponseEntity();
         } else {
-            return ResponseEntity.notFound().build();
+            return new ErrorResponse("Entity not found", HttpStatus.NOT_FOUND).toResponseEntity();
         }
     }
 }
