@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "c95269cd-2ffa-4e4e-a26c-45671c22f06e",
+		"name": "EcommerceOrderManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27404057",
+		"_collection_link": "https://nepcen.postman.co/workspace/SmartLabEntry~ceae09b9-a642-4685-b2be-a13457d25c69/collection/27404057-c95269cd-2ffa-4e4e-a26c-45671c22f06e?action=share&source=collection_link&creator=27404057"
+	},
+	"item": [
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "getCart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/carts/{{customerId}}/customer",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"carts",
+								"{{customerId}}",
+								"customer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EmptyCart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/carts/{{customerId}}/empty-cart",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"carts",
+								"{{customerId}}",
+								"empty-cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\":\"{{productId}}\",\n    \"quantity\":3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/carts/{{customerId}}/add-product",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"carts",
+								"{{customerId}}",
+								"add-product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove-product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productId\":\"{{productId}}\",\n    \"quantity\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/carts/{{customerId}}/remove-product",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"carts",
+								"{{customerId}}",
+								"remove-product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customer",
+			"item": [
+				{
+					"name": "getAllOrdersForCustomer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/customers/{{customerId}}/orders",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"customers",
+								"{{customerId}}",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "placeOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/orders/{{customerId}}/place-order",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"orders",
+								"{{customerId}}",
+								"place-order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-order-for-code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/orders/{{code}}/get-order-for-code",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"orders",
+								"{{code}}",
+								"get-order-for-code"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "GetallProduct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/products",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProduct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/products/{{productId}}",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Elma\",\n    \"description\":\"Yenilebilir meyve\",\n    \"price\":\"100\",\n    \"isOnSale\":\"ON_SALE\",\n    \"stock\":\"1111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/products",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProduct",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
