@@ -4,7 +4,6 @@ import com.gtrows.ECommerceOrderManagement.dto.response.IResponse.AccessResponse
 import com.gtrows.ECommerceOrderManagement.dto.response.IResponse.ErrorResponse;
 import com.gtrows.ECommerceOrderManagement.model.BaseEntity;
 import com.gtrows.ECommerceOrderManagement.service.GenericService;
-import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Hidden
 @AllArgsConstructor
 public abstract class GenericController<T extends BaseEntity> {
 
